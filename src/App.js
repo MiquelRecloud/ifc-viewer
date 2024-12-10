@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react'
-import * as OBC from "@thatopen/components"
-import * as WEBIFC from "web-ifc"
+import * as OBC from '@thatopen/components'
+import * as WEBIFC from 'web-ifc'
 
 function App() {
-
     const containerRef = useRef(null)
 
     useEffect(() => {
@@ -24,7 +23,7 @@ function App() {
             const fragmentIfcLoader = components.get(OBC.IfcLoader)
             await fragmentIfcLoader.setup()
 
-            fragmentIfcLoader.settings.excludedCategories.add(WEBIFC.IFCSPACE)
+            //fragmentIfcLoader.settings.excludedCategories.add(WEBIFC.IFCSPACE)
 
             fragmentIfcLoader.settings.webIfc.COORDINATE_TO_ORIGIN = true
 
@@ -32,9 +31,9 @@ function App() {
             const data = await file.arrayBuffer()
             const buffer = new Uint8Array(data)
             const model = await fragmentIfcLoader.load(buffer)
-            model.name = "example"
+            model.name = 'example'
             world.scene.three.add(model)
-            console.log("loaded")
+            console.log('loaded')
         }
 
         loadIfc()
@@ -42,11 +41,14 @@ function App() {
         return () => {
             world.renderer?.dispose()
         }
-
     }, [])
 
-    return <div ref={containerRef} style={{ width: '100vw', height: '100vh' }} />
-
+    return (
+        <div
+            ref={containerRef}
+            style={{ width: '100vw', height: '100vh' }}
+        />
+    )
 }
 
 export default App
